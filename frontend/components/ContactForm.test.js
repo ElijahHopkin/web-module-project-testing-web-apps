@@ -5,19 +5,44 @@ import userEvent from '@testing-library/user-event';
 import ContactForm from './ContactForm';
 
 test('renders without errors', () => {
+    render(<ContactForm/>);
 
 });
 
 test('renders the contact form header', () => {
-
+    render(<ContactForm />);
+    const header = screen.getByText(/contact form/i);
+    expect(header).toBeVisible();
+    expect(header).toBeInTheDocument();
+    expect(header).toBeTruthy();
+    expect(header).toHaveTextContent("Contact Form");
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
+    render(<ContactForm />);
+    const firstname= screen.getByPlaceholderText('Edd');
+    const error = screen.findAllByTestId('error');
+    //there's a better test than tohavelength, I think. How can I prove how many error messages there are?
+    expect(error).tohavelength;
+    expect(error).toBeEmptyDOMElement;
+    userEvent.type(firstname, 'John');
+    const errormessage = await screen.findByText('Error: ', {exact: false});
+    expect(errormessage).toBeVisible();
+    expect(error).tohavelength;
 
+    //how to test that there is only ONE?
 });
 
 test('renders THREE error messages if user enters no values into any fields.', async () => {
-
+    render(<ContactForm />);
+    const submit = screen.getByText('Submit');
+    const error = screen.findAllByTestId('error');
+    userEvent.click(submit);
+    //not what I'm looking for...
+    // expect(error).toBeCalledTimes(3);
+    expect(error).toBeVisible();
+    screen.debug();
+    
 });
 
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
