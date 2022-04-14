@@ -109,7 +109,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message" data-testid= 'message'>Message</label>
           <input
             onChange={handleChange}
             name="message"
